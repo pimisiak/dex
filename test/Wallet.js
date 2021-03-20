@@ -1,4 +1,4 @@
-const Wallet = artifacts.require("Wallet");
+const Wallet = artifacts.require("Dex");
 const Link = artifacts.require("Link");
 
 const truffleAssert = require('truffle-assertions');
@@ -7,7 +7,7 @@ contract("Wallet", accounts => {
     let wallet;
     let link;
 
-    beforeEach(async() => {
+    before(async() => {
         wallet = await Wallet.deployed();
         link = await Link.deployed();
     })
