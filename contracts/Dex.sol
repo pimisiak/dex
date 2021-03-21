@@ -5,6 +5,8 @@ import "./Wallet.sol";
 
 contract Dex is Wallet {
 
+    using SafeMath for uint256;
+
     enum Side {
         BUY,
         SELL
@@ -22,13 +24,17 @@ contract Dex is Wallet {
 
     mapping(bytes32 => mapping(uint => Order[])) orderBook;
 
-    function getOrderBook(bytes32 _ticker, Side _side) view public returns(Order[] memory) {
+    function getOrderBook(bytes32 _ticker, Side _side) public view returns(Order[] memory) {
         return orderBook[_ticker][uint(_side)];
     }
 
-    /*
-    function createLimitOrder() {}
+    function createLimitOrder(Side _side, bytes32 _ticker, uint256 _amount, uint256 _price) public {
+        if (_side == Side.BUY) {
+            require(balances[msg.sender][ethTicker] >= _amount.mul(_price));
+        }
+    }
 
-    function createMarketOrder() {}
-    */
+    function createMarketOrder(Side _side, bytes32 _ticker, uint256 _amount, uint256 _price) public {
+        //TODO
+    }
 }
