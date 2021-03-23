@@ -14,11 +14,12 @@ contract Dex is Wallet {
 
     struct Order {
         uint id;
-        address trader;
-        Side side;
-        bytes32 ticker;
         uint amount;
         uint price;
+        uint filled;
+        address trader;
+        bytes32 ticker;
+        Side side;
     }
 
     uint public nextOrderId = 0;
@@ -36,7 +37,7 @@ contract Dex is Wallet {
             require(balances[msg.sender][_ticker] >= _amount);
         }
         Order[] storage orders = orderBook[_ticker][uint(_side)];
-        orders.push(Order(nextOrderId, msg.sender, _side, _ticker, _amount, _price));
+        orders.push(Order(nextOrderId, _amount, _price, 0, msg.sender, _ticker, _side));
         nextOrderId = nextOrderId.add(1);
         sort(orders, _side);
     }
@@ -58,7 +59,7 @@ contract Dex is Wallet {
         _orders[_j] = temp;
     }
 
-    function createMarketOrder(Side _side, bytes32 _ticker, uint256 _amount, uint256 _price) public {
+    function createMarketOrder(Side _side, bytes32 _ticker, uint256 _amount) public {
         //TODO
     }
 }
