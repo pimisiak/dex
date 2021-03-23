@@ -15,7 +15,7 @@ contract("Dex", accounts => {
         await dex.addToken(linkTicker, link.address, {from: accounts[0]})
     });
 
-    it("should throw error if ETH balance is less than BUY limit order amount", async() => {
+    it("should throw an error if ETH balance is less than BUY limit order amount", async() => {
         await truffleAssert.reverts(
             dex.createLimitOrder(0, linkTicker, 1, 10)
         );
@@ -25,7 +25,7 @@ contract("Dex", accounts => {
         );
     });
     
-    it("should throw error if token balance is less than SELL limit order amount", async() => {
+    it("should throw an error if token balance is less than SELL limit order amount", async() => {
         await truffleAssert.reverts(
             dex.createLimitOrder(1, linkTicker, 1, 10)
         );
@@ -64,5 +64,5 @@ contract("Dex", accounts => {
             assert(sellOrderBook[i].price >= sellOrderBook[i + 1].price, "incorrect order in sell order book");
         }
     });
-
+    
 })
