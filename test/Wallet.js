@@ -1,5 +1,5 @@
 const Wallet = artifacts.require("Dex");
-const Link = artifacts.require("Link");
+const Link = artifacts.require("DummyLink");
 
 const truffleAssert = require('truffle-assertions');
 

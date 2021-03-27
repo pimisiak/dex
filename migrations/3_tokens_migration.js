@@ -1,4 +1,4 @@
-const Link = artifacts.require("Link");
+const Link = artifacts.require("DummyLink");
 const Wallet = artifacts.require("Wallet");
 
 module.exports = async function (deployer) {
